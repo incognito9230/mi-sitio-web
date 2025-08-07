@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reclama tu premio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      text-align: center;
+      padding: 50px;
+    }
+    #timer {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+    #continueBtn, #shareSection, #finalPrize {
+      display: none;
+      margin-top: 30px;
+    }
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    iframe {
+      width: 90%;
+      height: 250px;
+      border: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎁 Espera 30 segundos para reclamar tu premio</h1>
+
+  <!-- Puedes poner anuncios de PopAds o un video -->
+  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" allowfullscreen></iframe>
+
+  <div id="timer">30</div>
+
+  <div id="continueBtn">
+    <button onclick="mostrarSeccionCompartir()">Compartir en WhatsApp</button>
+  </div>
+
+  <div id="shareSection">
+    <p>Comparte este enlace con 5 personas por WhatsApp:</p>
+    <button onclick="compartir()">Compartir Ahora</button>
+  </div>
+
+  <div id="finalPrize">
+    <h2>🎉 ¡Aquí está tu premio!</h2>
+    <a href="https://linkvertise.com" target="_blank">Haz clic para obtenerlo</a>
+  </div>
+
+  <script>
+    let tiempo = 30;
+    const timerDiv = document.getElementById('timer');
+    const continueBtn = document.getElementById('continueBtn');
+
+    const cuentaRegresiva = setInterval(() => {
+      tiempo--;
+      timerDiv.innerText = tiempo;
+      if (tiempo === 0) {
+        clearInterval(cuentaRegresiva);
+        timerDiv.style.display = 'none';
+        continueBtn.style.display = 'block';
+      }
+    }, 1000);
+
+    function mostrarSeccionCompartir() {
+      continueBtn.style.display = 'none';
+      document.getElementById('shareSection').style.display = 'block';
+    }
+
+    function compartir() {
+      const mensaje = encodeURIComponent("¡Reclama tu premio aquí! 👉 https://tusitio.github.io");
+      const url = `https://api.whatsapp.com/send?text=${mensaje}`;
+      window.open(url, '_blank');
+
+      // Simula que ya compartió
+      setTimeout(() => {
+        document.getElementById('shareSection').style.display = 'none';
+        document.getElementById('finalPrize').style.display = 'block';
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
+
